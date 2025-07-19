@@ -9,21 +9,20 @@
   <title>Online Image Tools - Compress, Resize, Remove BG & Enhance</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
   <style>
-    body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; transition: background 0.3s ease; }
+    body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; }
     header { background: #3b82f6; color: white; padding: 2rem 1rem; text-align: center; }
     header h1 { margin: 0; font-size: 2rem; }
-    nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; padding: 1rem; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-    nav button { background: #3b82f6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
-    nav button:hover { background: #2563eb; }
+    nav { display: flex; justify-content: center; gap: 2rem; padding: 1rem; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    nav a { text-decoration: none; color: #3b82f6; font-weight: 600; }
     main { padding: 2rem 1rem; max-width: 1000px; margin: auto; }
     section { margin-bottom: 3rem; background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
     section h2 { margin-top: 0; color: #2563eb; }
-    .tool-upload { margin: 1rem 0; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-    .tool-upload input[type='file'] { padding: 0.5rem; }
-    .output-img { max-width: 100%; margin-top: 1rem; display: none; }
+    .tool { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+    .tool img { max-width: 300px; border-radius: 10px; margin-top: 1rem; }
+    .color-options { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 1rem 0; }
+    .color-box { width: 30px; height: 30px; border-radius: 5px; cursor: pointer; border: 1px solid #ccc; }
+    button { background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
     .adsense { margin: 2rem auto; text-align: center; }
-    .color-picker { display: flex; gap: 0.5rem; margin: 2rem 0; flex-wrap: wrap; justify-content: center; }
-    .color-box { width: 30px; height: 30px; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; }
     footer { text-align: center; font-size: 0.9rem; color: #666; padding: 2rem 1rem; }
   </style>
 </head>
@@ -34,36 +33,42 @@
   </header>
 
   <nav>
-    <button onclick="scrollToTool('compressor')">Compressor</button>
-    <button onclick="scrollToTool('resizer')">Resizer</button>
-    <button onclick="scrollToTool('bgremover')">BG Remover</button>
-    <button onclick="scrollToTool('hdmaker')">HD Maker</button>
+    <a href="#compressor">Compressor</a>
+    <a href="#resizer">Resizer</a>
+    <a href="#bgremover">BG Remover</a>
+    <a href="#hdmaker">HD Maker</a>
   </nav>
 
   <main>
-    <div class="color-picker">
-      <div class="color-box" style="background: #f9f9f9;" onclick="changeBg('#f9f9f9')"></div>
-      <div class="color-box" style="background: #ffffff;" onclick="changeBg('#ffffff')"></div>
-      <div class="color-box" style="background: #f0f0f0;" onclick="changeBg('#f0f0f0')"></div>
-      <div class="color-box" style="background: #d1fae5;" onclick="changeBg('#d1fae5')"></div>
-      <div class="color-box" style="background: #ffe4e6;" onclick="changeBg('#ffe4e6')"></div>
+    <div class="color-options">
+      <div class="color-box" style="background:#ffffff" onclick="document.body.style.backgroundColor='#ffffff'"></div>
+      <div class="color-box" style="background:#f0f0f0" onclick="document.body.style.backgroundColor='#f0f0f0'"></div>
+      <div class="color-box" style="background:#cce7ff" onclick="document.body.style.backgroundColor='#cce7ff'"></div>
+      <div class="color-box" style="background:#fce4ec" onclick="document.body.style.backgroundColor='#fce4ec'"></div>
+      <div class="color-box" style="background:#e8f5e9" onclick="document.body.style.backgroundColor='#e8f5e9'"></div>
     </div>
 
     <section id="compressor">
       <h2>Image Compressor</h2>
-      <div class="tool-upload">
-        <input type="file" accept="image/*" onchange="compressImage(event)" />
-        <canvas id="compressCanvas" style="display:none;"></canvas>
-        <img id="compressedImg" class="output-img" alt="Compressed Image" />
+      <div class="tool">
+        <input type="file" accept="image/*" id="compressInput">
+        <canvas id="compressCanvas" style="display:none"></canvas>
+        <img id="originalCompressImg" alt="Original Image">
+        <img id="compressedImg" alt="Compressed Image">
+        <button onclick="compressImage()">Compress</button>
+        <a id="compressDownload" style="display:none" download="compressed.jpg"><button>Download</button></a>
       </div>
     </section>
 
     <section id="resizer">
       <h2>Photo Resizer</h2>
-      <div class="tool-upload">
-        <input type="file" accept="image/*" onchange="resizeImage(event)" />
-        <canvas id="resizeCanvas" style="display:none;"></canvas>
-        <img id="resizedImg" class="output-img" alt="Resized Image" />
+      <div class="tool">
+        <input type="file" accept="image/*" id="resizeInput">
+        <canvas id="resizeCanvas" style="display:none"></canvas>
+        <img id="originalResizeImg" alt="Original Image">
+        <img id="resizedImg" alt="Resized Image">
+        <button onclick="resizeImage()">Resize</button>
+        <a id="resizeDownload" style="display:none" download="resized.jpg"><button>Download</button></a>
       </div>
     </section>
 
@@ -79,67 +84,68 @@
 
     <div class="adsense">
       <!-- Google AdSense Code -->
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-YOUR-AD-CLIENT-ID"
-           data-ad-slot="YOUR-AD-SLOT-ID"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-AD-CLIENT-ID" data-ad-slot="YOUR-AD-SLOT-ID" data-ad-format="auto" data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </main>
 
   <footer>
-    &copy; 2025 Mobrur Ahmed. All rights reserved.
+    &copy; 2025 Mobrur Ahmed | All rights reserved
   </footer>
 
   <script>
-    function scrollToTool(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
+    function compressImage() {
+      const input = document.getElementById('compressInput');
+      const canvas = document.getElementById('compressCanvas');
+      const originalImg = document.getElementById('originalCompressImg');
+      const outputImg = document.getElementById('compressedImg');
+      const download = document.getElementById('compressDownload');
 
-    function changeBg(color) {
-      document.body.style.background = color;
-    }
-
-    function compressImage(event) {
-      const file = event.target.files[0];
+      if (input.files.length === 0) return;
+      const file = input.files[0];
       const reader = new FileReader();
       reader.onload = function(e) {
         const img = new Image();
         img.onload = function() {
-          const canvas = document.getElementById('compressCanvas');
-          const ctx = canvas.getContext('2d');
           canvas.width = img.width;
           canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0);
-          const compressedData = canvas.toDataURL('image/jpeg', 0.5);
-          const output = document.getElementById('compressedImg');
-          output.src = compressedData;
-          output.style.display = 'block';
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.5);
+          originalImg.src = e.target.result;
+          outputImg.src = dataUrl;
+          download.href = dataUrl;
+          download.style.display = 'inline-block';
         };
         img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
 
-    function resizeImage(event) {
-      const file = event.target.files[0];
+    function resizeImage() {
+      const input = document.getElementById('resizeInput');
+      const canvas = document.getElementById('resizeCanvas');
+      const originalImg = document.getElementById('originalResizeImg');
+      const outputImg = document.getElementById('resizedImg');
+      const download = document.getElementById('resizeDownload');
+
+      if (input.files.length === 0) return;
+      const file = input.files[0];
       const reader = new FileReader();
       reader.onload = function(e) {
         const img = new Image();
         img.onload = function() {
-          const canvas = document.getElementById('resizeCanvas');
+          const newWidth = img.width / 2;
+          const newHeight = img.height / 2;
+          canvas.width = newWidth;
+          canvas.height = newHeight;
           const ctx = canvas.getContext('2d');
-          const width = 300;
-          const height = (img.height / img.width) * 300;
-          canvas.width = width;
-          canvas.height = height;
-          ctx.drawImage(img, 0, 0, width, height);
-          const resizedData = canvas.toDataURL('image/jpeg');
-          const output = document.getElementById('resizedImg');
-          output.src = resizedData;
-          output.style.display = 'block';
+          ctx.drawImage(img, 0, 0, newWidth, newHeight);
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+          originalImg.src = e.target.result;
+          outputImg.src = dataUrl;
+          download.href = dataUrl;
+          download.style.display = 'inline-block';
         };
         img.src = e.target.result;
       };
