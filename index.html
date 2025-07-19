@@ -3,171 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="All-in-one free online image tools: compress, resize, remove background, and enhance photo quality. Fast, responsive, and SEO-optimized." />
-  <title>All-in-One Photo Tool – Compress, Resize, Remove BG</title>
-  <link rel="icon" href="icon.png" />
+  <meta name="description" content="All-in-one free online tools for image compression, photo resizing, background removal, and HD enhancement. Fast, secure and mobile-friendly." />
+  <meta name="keywords" content="image compressor, photo resizer, background remover, HD photo enhancer, free tools online" />
+  <meta name="author" content="Mobrur Ahmed" />
+  <title>Online Image Tools - Compress, Resize, Remove BG & Enhance</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
   <style>
-    :root {
-      --bg-color: #f3f4f6;
-    }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: var(--bg-color);
-      color: #111827;
-      transition: background 0.3s ease;
-    }
-    header {
-      background: #1f2937;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      background: #374151;
-      gap: 0.5rem;
-      padding: 1rem;
-    }
-    nav button {
-      background: #3b82f6;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 0.6rem 1rem;
-      cursor: pointer;
-      font-size: 0.95rem;
-    }
-    nav button:hover {
-      background: #2563eb;
-    }
-    main {
-      max-width: 960px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    }
-    .tool {
-      display: none;
-      margin-top: 2rem;
-    }
-    .tool.active {
-      display: block;
-    }
-    .drop-zone {
-      border: 2px dashed #60a5fa;
-      padding: 2rem;
-      text-align: center;
-      background: #e0f2fe;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    input[type='file'] {
-      display: none;
-    }
-    img.preview {
-      max-width: 100%;
-      height: auto;
-      margin-top: 1rem;
-      border-radius: 6px;
-    }
-    .output {
-      margin-top: 1rem;
-    }
-    .adsense {
-      margin: 2rem 0;
-      text-align: center;
-    }
-    .color-picker {
-      margin-top: 2rem;
-      text-align: center;
-    }
-    .color-box {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      margin: 5px;
-      border-radius: 4px;
-      cursor: pointer;
-      border: 2px solid #e5e7eb;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: #6b7280;
-      font-size: 0.9rem;
-    }
+    body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; transition: background 0.3s ease; }
+    header { background: #3b82f6; color: white; padding: 2rem 1rem; text-align: center; }
+    header h1 { margin: 0; font-size: 2rem; }
+    nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; padding: 1rem; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    nav button { background: #3b82f6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
+    nav button:hover { background: #2563eb; }
+    main { padding: 2rem 1rem; max-width: 1000px; margin: auto; }
+    section { margin-bottom: 3rem; background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
+    section h2 { margin-top: 0; color: #2563eb; }
+    .tool-upload { margin: 1rem 0; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+    .tool-upload input[type='file'] { padding: 0.5rem; }
+    .output-img { max-width: 100%; margin-top: 1rem; display: none; }
+    .adsense { margin: 2rem auto; text-align: center; }
+    .color-picker { display: flex; gap: 0.5rem; margin: 2rem 0; flex-wrap: wrap; justify-content: center; }
+    .color-box { width: 30px; height: 30px; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; }
+    footer { text-align: center; font-size: 0.9rem; color: #666; padding: 2rem 1rem; }
   </style>
 </head>
 <body>
   <header>
-    <h1>All-in-One Photo Tools</h1>
-    <p>Compress | Resize | Remove BG | Enhance</p>
+    <h1>Free Online Image Tools</h1>
+    <p>Compress, Resize, Remove Background, and Enhance Photos Instantly</p>
   </header>
 
   <nav>
-    <button onclick="switchTool('compressor')">Compress</button>
-    <button onclick="switchTool('resizer')">Resize</button>
-    <button onclick="switchTool('bgRemover')">Remove BG</button>
-    <button onclick="switchTool('enhancer')">Enhance</button>
+    <button onclick="scrollToTool('compressor')">Compressor</button>
+    <button onclick="scrollToTool('resizer')">Resizer</button>
+    <button onclick="scrollToTool('bgremover')">BG Remover</button>
+    <button onclick="scrollToTool('hdmaker')">HD Maker</button>
   </nav>
 
   <main>
+    <div class="color-picker">
+      <div class="color-box" style="background: #f9f9f9;" onclick="changeBg('#f9f9f9')"></div>
+      <div class="color-box" style="background: #ffffff;" onclick="changeBg('#ffffff')"></div>
+      <div class="color-box" style="background: #f0f0f0;" onclick="changeBg('#f0f0f0')"></div>
+      <div class="color-box" style="background: #d1fae5;" onclick="changeBg('#d1fae5')"></div>
+      <div class="color-box" style="background: #ffe4e6;" onclick="changeBg('#ffe4e6')"></div>
+    </div>
+
+    <section id="compressor">
+      <h2>Image Compressor</h2>
+      <div class="tool-upload">
+        <input type="file" accept="image/*" onchange="compressImage(event)" />
+        <canvas id="compressCanvas" style="display:none;"></canvas>
+        <img id="compressedImg" class="output-img" alt="Compressed Image" />
+      </div>
+    </section>
+
+    <section id="resizer">
+      <h2>Photo Resizer</h2>
+      <div class="tool-upload">
+        <input type="file" accept="image/*" onchange="resizeImage(event)" />
+        <canvas id="resizeCanvas" style="display:none;"></canvas>
+        <img id="resizedImg" class="output-img" alt="Resized Image" />
+      </div>
+    </section>
+
+    <section id="bgremover">
+      <h2>Background Remover</h2>
+      <iframe class="tool-iframe" src="https://www.remove.bg"></iframe>
+    </section>
+
+    <section id="hdmaker">
+      <h2>HD Photo Maker</h2>
+      <iframe class="tool-iframe" src="https://imgupscaler.com"></iframe>
+    </section>
+
     <div class="adsense">
-      <!-- Replace with AdSense code -->
+      <!-- Google AdSense Code -->
       <ins class="adsbygoogle"
            style="display:block"
-           data-ad-client="ca-pub-xxxxxxxx"
-           data-ad-slot="xxxxxxxxxx"
+           data-ad-client="ca-pub-YOUR-AD-CLIENT-ID"
+           data-ad-slot="YOUR-AD-SLOT-ID"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <div class="tool" id="compressor">
-      <h2>Compress Image</h2>
-      <label class="drop-zone" onclick="upload('compressInput')">Click or Drop Image</label>
-      <input type="file" id="compressInput" accept="image/*" onchange="compressImage(this.files)" />
-      <div class="output" id="compressPreview"></div>
-    </div>
-
-    <div class="tool" id="resizer">
-      <h2>Resize Image</h2>
-      <label class="drop-zone" onclick="upload('resizeInput')">Click or Drop Image</label>
-      <input type="file" id="resizeInput" accept="image/*" onchange="resizeImage(this.files)" />
-      Width: <input type="number" id="resizeWidth" placeholder="800" /> px
-      Height: <input type="number" id="resizeHeight" placeholder="600" /> px
-      <div class="output" id="resizePreview"></div>
-    </div>
-
-    <div class="tool" id="bgRemover">
-      <h2>Remove Background</h2>
-      <p>Use external tool: <a href="https://www.remove.bg" target="_blank">remove.bg</a></p>
-    </div>
-
-    <div class="tool" id="enhancer">
-      <h2>Enhance Image</h2>
-      <label class="drop-zone" onclick="upload('enhanceInput')">Click or Drop Image</label>
-      <input type="file" id="enhanceInput" accept="image/*" onchange="enhanceImage(this.files)" />
-      <div class="output" id="enhancePreview"></div>
-    </div>
-
-    <div class="color-picker">
-      <h3>Choose Background Color:</h3>
-      <div class="color-box" style="background: #f3f4f6" onclick="setBgColor('#f3f4f6')"></div>
-      <div class="color-box" style="background: #fef9c3" onclick="setBgColor('#fef9c3')"></div>
-      <div class="color-box" style="background: #d1fae5" onclick="setBgColor('#d1fae5')"></div>
-      <div class="color-box" style="background: #e0f2fe" onclick="setBgColor('#e0f2fe')"></div>
-      <div class="color-box" style="background: #fce7f3" onclick="setBgColor('#fce7f3')"></div>
     </div>
   </main>
 
@@ -176,25 +94,56 @@
   </footer>
 
   <script>
-    function switchTool(id) {
-      document.querySelectorAll('.tool').forEach(t => t.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+    function scrollToTool(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
     }
-    function upload(id) {
-      document.getElementById(id).click();
+
+    function changeBg(color) {
+      document.body.style.background = color;
     }
-    function setBgColor(color) {
-      document.documentElement.style.setProperty('--bg-color', color);
+
+    function compressImage(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.getElementById('compressCanvas');
+          const ctx = canvas.getContext('2d');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          const compressedData = canvas.toDataURL('image/jpeg', 0.5);
+          const output = document.getElementById('compressedImg');
+          output.src = compressedData;
+          output.style.display = 'block';
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
-    function compressImage(files) {
-      // placeholder function
-      document.getElementById('compressPreview').innerText = 'Compressing image...';
-    }
-    function resizeImage(files) {
-      document.getElementById('resizePreview').innerText = 'Resizing image...';
-    }
-    function enhanceImage(files) {
-      document.getElementById('enhancePreview').innerText = 'Enhancing image...';
+
+    function resizeImage(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.getElementById('resizeCanvas');
+          const ctx = canvas.getContext('2d');
+          const width = 300;
+          const height = (img.height / img.width) * 300;
+          canvas.width = width;
+          canvas.height = height;
+          ctx.drawImage(img, 0, 0, width, height);
+          const resizedData = canvas.toDataURL('image/jpeg');
+          const output = document.getElementById('resizedImg');
+          output.src = resizedData;
+          output.style.display = 'block';
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   </script>
 </body>
