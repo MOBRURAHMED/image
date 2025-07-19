@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="All-in-one free online image tools: compress, resize, remove background, and enhance photo quality. Fast, responsive, and SEO-optimized." />
+  <title>All-in-One Photo Tool – Compress, Resize, Remove BG</title>
+  <link rel="icon" href="icon.png" />
+  <style>
+    :root {
+      --bg-color: #f3f4f6;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-color);
+      color: #111827;
+      transition: background 0.3s ease;
+    }
+    header {
+      background: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: #374151;
+      gap: 0.5rem;
+      padding: 1rem;
+    }
+    nav button {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    nav button:hover {
+      background: #2563eb;
+    }
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    .tool {
+      display: none;
+      margin-top: 2rem;
+    }
+    .tool.active {
+      display: block;
+    }
+    .drop-zone {
+      border: 2px dashed #60a5fa;
+      padding: 2rem;
+      text-align: center;
+      background: #e0f2fe;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    input[type='file'] {
+      display: none;
+    }
+    img.preview {
+      max-width: 100%;
+      height: auto;
+      margin-top: 1rem;
+      border-radius: 6px;
+    }
+    .output {
+      margin-top: 1rem;
+    }
+    .adsense {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    .color-picker {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .color-box {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin: 5px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 2px solid #e5e7eb;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>All-in-One Photo Tools</h1>
+    <p>Compress | Resize | Remove BG | Enhance</p>
+  </header>
+
+  <nav>
+    <button onclick="switchTool('compressor')">Compress</button>
+    <button onclick="switchTool('resizer')">Resize</button>
+    <button onclick="switchTool('bgRemover')">Remove BG</button>
+    <button onclick="switchTool('enhancer')">Enhance</button>
+  </nav>
+
+  <main>
+    <div class="adsense">
+      <!-- Replace with AdSense code -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-xxxxxxxx"
+           data-ad-slot="xxxxxxxxxx"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="tool" id="compressor">
+      <h2>Compress Image</h2>
+      <label class="drop-zone" onclick="upload('compressInput')">Click or Drop Image</label>
+      <input type="file" id="compressInput" accept="image/*" onchange="compressImage(this.files)" />
+      <div class="output" id="compressPreview"></div>
+    </div>
+
+    <div class="tool" id="resizer">
+      <h2>Resize Image</h2>
+      <label class="drop-zone" onclick="upload('resizeInput')">Click or Drop Image</label>
+      <input type="file" id="resizeInput" accept="image/*" onchange="resizeImage(this.files)" />
+      Width: <input type="number" id="resizeWidth" placeholder="800" /> px
+      Height: <input type="number" id="resizeHeight" placeholder="600" /> px
+      <div class="output" id="resizePreview"></div>
+    </div>
+
+    <div class="tool" id="bgRemover">
+      <h2>Remove Background</h2>
+      <p>Use external tool: <a href="https://www.remove.bg" target="_blank">remove.bg</a></p>
+    </div>
+
+    <div class="tool" id="enhancer">
+      <h2>Enhance Image</h2>
+      <label class="drop-zone" onclick="upload('enhanceInput')">Click or Drop Image</label>
+      <input type="file" id="enhanceInput" accept="image/*" onchange="enhanceImage(this.files)" />
+      <div class="output" id="enhancePreview"></div>
+    </div>
+
+    <div class="color-picker">
+      <h3>Choose Background Color:</h3>
+      <div class="color-box" style="background: #f3f4f6" onclick="setBgColor('#f3f4f6')"></div>
+      <div class="color-box" style="background: #fef9c3" onclick="setBgColor('#fef9c3')"></div>
+      <div class="color-box" style="background: #d1fae5" onclick="setBgColor('#d1fae5')"></div>
+      <div class="color-box" style="background: #e0f2fe" onclick="setBgColor('#e0f2fe')"></div>
+      <div class="color-box" style="background: #fce7f3" onclick="setBgColor('#fce7f3')"></div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Mobrur Ahmed. All rights reserved.
+  </footer>
+
+  <script>
+    function switchTool(id) {
+      document.querySelectorAll('.tool').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+    function upload(id) {
+      document.getElementById(id).click();
+    }
+    function setBgColor(color) {
+      document.documentElement.style.setProperty('--bg-color', color);
+    }
+    function compressImage(files) {
+      // placeholder function
+      document.getElementById('compressPreview').innerText = 'Compressing image...';
+    }
+    function resizeImage(files) {
+      document.getElementById('resizePreview').innerText = 'Resizing image...';
+    }
+    function enhanceImage(files) {
+      document.getElementById('enhancePreview').innerText = 'Enhancing image...';
+    }
+  </script>
+</body>
+</html>
