@@ -1,168 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="All-in-one free online tools for image compression, photo resizing, background removal, and HD enhancement. Fast, secure and mobile-friendly." />
-  <meta name="keywords" content="image compressor, photo resizer, background remover, HD photo enhancer, free tools online" />
-  <meta name="author" content="Mobrur Ahmed" />
-  <title>Online Image Tools - Compress, Resize, Remove BG & Enhance</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
-  <style>
-    body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; transition: background 0.3s ease; }
-    header { background: #3b82f6; color: white; padding: 2rem 1rem; text-align: center; }
-    header h1 { margin: 0; font-size: 2rem; }
-    nav { display: flex; justify-content: center; gap: 2rem; padding: 1rem; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-    nav a { text-decoration: none; color: #3b82f6; font-weight: 600; }
-    main { padding: 2rem 1rem; max-width: 1000px; margin: auto; }
-    section { margin-bottom: 3rem; background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
-    section h2 { margin-top: 0; color: #2563eb; }
-    .tool-iframe { width: 100%; height: 500px; border: none; border-radius: 8px; }
-    .adsense { margin: 2rem auto; text-align: center; }
-    .color-options { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
-    .color-box { width: 30px; height: 30px; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; }
-    #uploadInput { margin-top: 1rem; }
-    #resultImage { margin-top: 1rem; max-width: 100%; }
-    .tool-controls { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
-    footer { text-align: center; font-size: 0.9rem; color: #666; padding: 2rem 1rem; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online image compression, resizing, HD enhancement, and background removal tool. Compress multiple images, preview before/after, and download WebP. PWA & SEO optimized.">
+    <meta name="keywords" content="Image compressor, photo resizer, background remover, HD photo enhancer, WebP, online tool">
+    <meta name="author" content="Mobrur Ahmed">
+    <title>Smart Image Tools by Mobrur</title>
+
+    <!-- AdSense Verification -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1851031451409162"
+        crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input,
+        select,
+        button {
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .preview {
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .preview img {
+            max-width: 300px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .colors {
+            margin: 20px;
+        }
+
+        .color-box {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+
+        .tools {
+            margin-top: 30px;
+        }
+
+        .ad-placeholder {
+            margin: 20px;
+            padding: 10px;
+            border: 1px dashed #ccc;
+            background-color: #fff;
+        }
+    </style>
 </head>
+
 <body>
-  <header>
-    <h1>Free Online Image Tools</h1>
-    <p>Compress, Resize, Remove Background, and Enhance Photos Instantly</p>
-  </header>
+    <h1>Smart Image Tools</h1>
+    <input type="file" id="imageInput" multiple accept="image/*">
+    <br>
+    Compression Quality (1-100): <input type="number" id="quality" value="70" min="1" max="100">
+    <br>
+    Resize Width (px): <input type="number" id="resizeWidth">
+    Resize Height (px): <input type="number" id="resizeHeight">
+    <br>
+    Resize Width (mm): <input type="number" id="resizeWidthMM">
+    Resize Height (mm): <input type="number" id="resizeHeightMM">
+    <br>
+    <button onclick="compressAndResize()">Compress & Resize</button>
 
-  <nav>
-    <a href="#compressor">Compressor</a>
-    <a href="#resizer">Resizer</a>
-    <a href="#bgremover">BG Remover</a>
-    <a href="#hdmaker">HD Maker</a>
-  </nav>
+    <div class="preview" id="preview"></div>
 
-  <main>
-    <div class="color-options">
-      <div class="color-box" style="background:#ffffff" onclick="document.body.style.background='#ffffff'"></div>
-      <div class="color-box" style="background:#f9f9f9" onclick="document.body.style.background='#f9f9f9'"></div>
-      <div class="color-box" style="background:#d1fae5" onclick="document.body.style.background='#d1fae5'"></div>
-      <div class="color-box" style="background:#fef3c7" onclick="document.body.style.background='#fef3c7'"></div>
-      <div class="color-box" style="background:#fde68a" onclick="document.body.style.background='#fde68a'"></div>
-      <div class="color-box" style="background:#e0f2fe" onclick="document.body.style.background='#e0f2fe'"></div>
+    <div class="colors">
+        <h3>Background Color:</h3>
+        <div class="color-box" style="background-color: white;" onclick="changeBgColor('white')"></div>
+        <div class="color-box" style="background-color: lightblue;" onclick="changeBgColor('lightblue')"></div>
+        <div class="color-box" style="background-color: #e0e0e0;" onclick="changeBgColor('#e0e0e0')"></div>
+        <div class="color-box" style="background-color: #f0ffe0;" onclick="changeBgColor('#f0ffe0')"></div>
     </div>
 
-    <section id="compressor">
-      <h2>Image Compressor</h2>
-      <input type="file" id="uploadInput" accept="image/*" />
-      <div class="tool-controls">
-        <label>Compression Level (%): <input type="range" id="compressionLevel" min="10" max="100" value="70"></label>
-        <span id="compressionAmount">70%</span>
-        <button onclick="compressImage()">Compress</button>
-        <a id="downloadLink" style="display:none;" download="compressed.jpg">Download</a>
-      </div>
-      <img id="resultImage" alt="Compressed result preview" />
-    </section>
-
-    <section id="resizer">
-      <h2>Photo Resizer</h2>
-      <input type="file" id="resizeInput" accept="image/*" />
-      <div class="tool-controls">
-        <label>Width (px/mm): <input type="number" id="resizeWidth" /></label>
-        <label>Height (px/mm): <input type="number" id="resizeHeight" /></label>
-        <button onclick="resizeImage()">Resize</button>
-        <a id="resizeDownload" style="display:none;" download="resized.jpg">Download</a>
-      </div>
-      <img id="resizePreview" alt="Resized result preview" />
-    </section>
-
-    <section id="bgremover">
-      <h2>Background Remover</h2>
-      <p>Use our trusted partner to remove image background online:</p>
-      <a href="https://www.remove.bg" target="_blank"><button>Go to Remove.bg</button></a>
-    </section>
-
-    <section id="hdmaker">
-      <h2>HD Photo Maker</h2>
-      <p>Enhance your image resolution using the best free HD tool:</p>
-      <a href="https://imgupscaler.com" target="_blank"><button>Go to ImgUpscaler</button></a>
-    </section>
-
-    <div class="adsense">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1851031451409162"
-     crossorigin="anonymous"></script>
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1851031451409162" data-ad-slot="1851031451409162" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <div class="tools">
+        <button onclick="window.open('https://www.remove.bg/', '_blank')">Remove Background</button>
+        <button onclick="window.open('https://imgupscaler.com/', '_blank')">HD Photo Generator</button>
     </div>
-  </main>
 
-  <footer>
-    &copy; 2025 Mobrur Ahmed | All Rights Reserved
-  </footer>
+    <div class="ad-placeholder">
+        <!-- Google Ad Unit Placeholder -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-1851031451409162"
+            data-ad-slot="1234567890"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
-  <script>
-    const compressionInput = document.getElementById('compressionLevel');
-    const compressionDisplay = document.getElementById('compressionAmount');
-    compressionInput.addEventListener('input', () => {
-      compressionDisplay.textContent = compressionInput.value + '%';
-    });
-
-    function compressImage() {
-      const fileInput = document.getElementById('uploadInput');
-      const level = parseInt(document.getElementById('compressionLevel').value);
-      const output = document.getElementById('resultImage');
-      const download = document.getElementById('downloadLink');
-      if (fileInput.files.length === 0) return;
-
-      const file = fileInput.files[0];
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = new Image();
-        img.src = e.target.result;
-        img.onload = function () {
-          const canvas = document.createElement('canvas');
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0);
-          canvas.toBlob((blob) => {
-            const url = URL.createObjectURL(blob);
-            output.src = url;
-            download.href = url;
-            download.style.display = 'inline-block';
-          }, 'image/jpeg', level / 100);
+    <script>
+        function changeBgColor(color) {
+            document.body.style.backgroundColor = color;
         }
-      }
-      reader.readAsDataURL(file);
-    }
 
-    function resizeImage() {
-      const fileInput = document.getElementById('resizeInput');
-      const width = parseInt(document.getElementById('resizeWidth').value);
-      const height = parseInt(document.getElementById('resizeHeight').value);
-      const preview = document.getElementById('resizePreview');
-      const download = document.getElementById('resizeDownload');
-      if (fileInput.files.length === 0) return;
-
-      const file = fileInput.files[0];
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = new Image();
-        img.src = e.target.result;
-        img.onload = function () {
-          const canvas = document.createElement('canvas');
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-          canvas.toBlob((blob) => {
-            const url = URL.createObjectURL(blob);
-            preview.src = url;
-            download.href = url;
-            download.style.display = 'inline-block';
-          }, 'image/jpeg', 1);
+        function mmToPx(mm) {
+            return Math.round(mm * 3.7795);
         }
-      }
-      reader.readAsDataURL(file);
-    }
-  </script>
+
+        function compressAndResize() {
+            const input = document.getElementById('imageInput');
+            const quality = parseInt(document.getElementById('quality').value);
+            const resizeWidth = parseInt(document.getElementById('resizeWidth').value) || null;
+            const resizeHeight = parseInt(document.getElementById('resizeHeight').value) || null;
+            const resizeWidthMM = parseInt(document.getElementById('resizeWidthMM').value);
+            const resizeHeightMM = parseInt(document.getElementById('resizeHeightMM').value);
+            const preview = document.getElementById('preview');
+            preview.innerHTML = '';
+
+            const files = input.files;
+            if (!files.length) return alert('Please select image(s)');
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const img = new Image();
+                    img.onload = function () {
+                        let canvas = document.createElement('canvas');
+                        let ctx = canvas.getContext('2d');
+
+                        let newW = resizeWidth || mmToPx(resizeWidthMM) || img.width;
+                        let newH = resizeHeight || mmToPx(resizeHeightMM) || img.height;
+                        canvas.width = newW;
+                        canvas.height = newH;
+                        ctx.drawImage(img, 0, 0, newW, newH);
+
+                        canvas.toBlob(function (blob) {
+                            const originalSize = file.size;
+                            const newSize = blob.size;
+                            const compressionRate = (((originalSize - newSize) / originalSize) * 100).toFixed(2);
+
+                            const url = URL.createObjectURL(blob);
+                            const resultImg = new Image();
+                            resultImg.src = url;
+
+                            const div = document.createElement('div');
+                            div.innerHTML = `
+                                <p><strong>Original:</strong> ${file.name} - ${(originalSize / 1024).toFixed(2)} KB</p>
+                                <p><strong>Compressed:</strong> ${(newSize / 1024).toFixed(2)} KB (${compressionRate}% reduced)</p>
+                                <p><strong>Size:</strong> ${newW}px x ${newH}px</p>
+                            `;
+                            div.appendChild(resultImg);
+
+                            const downloadLink = document.createElement('a');
+                            downloadLink.href = url;
+                            downloadLink.download = 'compressed_' + file.name.replace(/\.[^/.]+$/, '') + '.webp';
+                            downloadLink.innerText = 'Download';
+                            downloadLink.style.display = 'inline-block';
+                            downloadLink.style.marginTop = '10px';
+                            downloadLink.style.padding = '10px';
+                            downloadLink.style.background = '#28a745';
+                            downloadLink.style.color = '#fff';
+                            downloadLink.style.textDecoration = 'none';
+
+                            div.appendChild(downloadLink);
+                            preview.appendChild(div);
+                        }, 'image/webp', quality / 100);
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
 </body>
+
 </html>
