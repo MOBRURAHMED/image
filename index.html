@@ -9,78 +9,111 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1851031451409162" crossorigin="anonymous"></script>
   <style>
+    :root {
+      --primary: #0077cc;
+      --accent: #ff4081;
+      --bg: #f0f2f5;
+      --card: #ffffff;
+      --text: #333;
+    }
+
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background-color: #f9f9f9;
+      background-color: var(--bg);
       padding: 1rem;
+      color: var(--text);
     }
 
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
+      gap: 2rem;
       max-width: 1000px;
-      margin: 0 auto;
+      margin: auto;
     }
 
     .card {
-      background: #fff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      border-radius: 16px;
-      padding: 1.5rem;
+      background: var(--card);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
       width: 100%;
       box-sizing: border-box;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
     }
 
     input[type="file"] {
-      display: block;
-      margin: 1rem auto;
+      margin: 0.8rem auto;
     }
 
     img.preview, img.result {
       display: block;
       max-width: 100%;
       margin: 1rem auto;
+      border-radius: 12px;
     }
 
     label {
       margin-top: 1rem;
       display: block;
+      font-weight: bold;
     }
 
-    input, button {
+    input, button, a.download {
       width: 100%;
-      padding: 0.6rem;
+      padding: 0.7rem;
       margin-top: 0.3rem;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid #ccc;
       box-sizing: border-box;
+      font-size: 1rem;
+    }
+
+    button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #005fa3;
+    }
+
+    a.download {
+      display: block;
+      text-align: center;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      margin-top: 1rem;
     }
 
     .color-boxes {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
       justify-content: center;
     }
 
     .color-box {
-      width: 30px;
-      height: 30px;
-      border-radius: 4px;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
       cursor: pointer;
-      border: 1px solid #ccc;
+      border: 2px solid #ddd;
     }
 
     .ad-section {
-      margin-top: 1.5rem;
+      margin-top: 2rem;
       text-align: center;
     }
 
@@ -92,7 +125,7 @@
 
     @media (max-width: 600px) {
       .card {
-        padding: 1rem;
+        padding: 1.2rem;
       }
     }
   </style>
@@ -174,7 +207,7 @@
 
       function toPixels(val) {
         if (val.toLowerCase().includes('mm')) {
-          return Math.round(parseFloat(val) * 3.78); // 1 mm = 3.78 px approx
+          return Math.round(parseFloat(val) * 3.78);
         }
         return parseInt(val);
       }
