@@ -7,15 +7,22 @@
   <meta name="description" content="Free Online Image Compressor, Resizer, Background Remover & HD Enhancer. Compress, resize, and optimize your photos easily.">
   <title>Image Tool - Compress, Resize, Enhance</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1851031451409162" crossorigin="anonymous"></script>
   <style>
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
       background-color: #f9f9f9;
+      padding: 1rem;
+    }
+
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 1rem;
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .card {
@@ -23,9 +30,8 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       border-radius: 16px;
       padding: 1.5rem;
-      max-width: 600px;
       width: 100%;
-      margin-bottom: 2rem;
+      box-sizing: border-box;
     }
 
     h2 {
@@ -38,18 +44,18 @@
       margin: 1rem auto;
     }
 
-    .preview, .result {
+    img.preview, img.result {
       display: block;
       max-width: 100%;
       margin: 1rem auto;
     }
 
     label {
-      display: block;
       margin-top: 1rem;
+      display: block;
     }
 
-    input, select, button {
+    input, button {
       width: 100%;
       padding: 0.6rem;
       margin-top: 0.3rem;
@@ -62,7 +68,6 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin: 1rem 0;
       justify-content: center;
     }
 
@@ -74,66 +79,75 @@
       border: 1px solid #ccc;
     }
 
-    .button-section button {
-      margin-top: 1rem;
-    }
-
     .ad-section {
-      margin: 1rem 0;
+      margin-top: 1.5rem;
       text-align: center;
     }
 
     .ad-section ins {
-      display: inline-block;
+      display: block;
       width: 100%;
       min-height: 90px;
     }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 1rem;
+      }
+    }
   </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1851031451409162" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <div class="card">
-    <h2>📷 Image Compressor & Resizer</h2>
-    <input type="file" id="imageInput" accept="image/*">
-    <img id="preview" class="preview" alt="Preview Image" hidden>
+  <div class="container">
+    <div class="card">
+      <h2>📷 Image Compressor & Resizer</h2>
+      <input type="file" id="imageInput" accept="image/*">
+      <img id="preview" class="preview" alt="Preview Image" hidden>
 
-    <label for="quality">Compression Quality (1-100):</label>
-    <input type="number" id="quality" min="1" max="100" value="75">
+      <label for="quality">Compression Quality (1-100):</label>
+      <input type="number" id="quality" min="1" max="100" value="75">
 
-    <label for="width">Resize Width (px):</label>
-    <input type="number" id="width" placeholder="e.g. 800">
+      <label for="width">Resize Width (px or mm):</label>
+      <input type="text" id="width" placeholder="e.g. 800 or 100mm">
 
-    <label for="height">Resize Height (px):</label>
-    <input type="number" id="height" placeholder="e.g. 600">
+      <label for="height">Resize Height (px or mm):</label>
+      <input type="text" id="height" placeholder="e.g. 600 or 50mm">
 
-    <button onclick="compressImage()">Compress & Resize</button>
+      <button onclick="compressImage()">Compress & Resize</button>
 
-    <img id="result" class="result" hidden>
-    <p id="info"></p>
-    <a id="downloadLink" hidden>📥 Download Image</a>
-  </div>
-
-  <div class="card">
-    <h2>🎨 Background Color</h2>
-    <div class="color-boxes">
-      <div class="color-box" style="background: #ffffff" onclick="changeBg('#ffffff')"></div>
-      <div class="color-box" style="background: #f0f0f0" onclick="changeBg('#f0f0f0')"></div>
-      <div class="color-box" style="background: #000000" onclick="changeBg('#000000')"></div>
-      <div class="color-box" style="background: #e0f7fa" onclick="changeBg('#e0f7fa')"></div>
-      <div class="color-box" style="background: #fce4ec" onclick="changeBg('#fce4ec')"></div>
+      <img id="result" class="result" hidden>
+      <p id="info"></p>
+      <a id="downloadLink" class="download" hidden>📥 Download Image</a>
     </div>
-  </div>
 
-  <div class="card button-section">
-    <h2>🔧 Extra Tools</h2>
-    <button onclick="window.open('https://www.remove.bg/', '_blank')">Remove Background</button>
-    <button onclick="window.open('https://imgupscaler.com/', '_blank')">Make HD Photo</button>
-  </div>
+    <div class="card">
+      <h2>🎨 Background Color</h2>
+      <div class="color-boxes">
+        <div class="color-box" style="background: #ffffff" onclick="changeBg('#ffffff')"></div>
+        <div class="color-box" style="background: #f0f0f0" onclick="changeBg('#f0f0f0')"></div>
+        <div class="color-box" style="background: #000000" onclick="changeBg('#000000')"></div>
+        <div class="color-box" style="background: #e0f7fa" onclick="changeBg('#e0f7fa')"></div>
+        <div class="color-box" style="background: #fce4ec" onclick="changeBg('#fce4ec')"></div>
+      </div>
+    </div>
 
-  <div class="card ad-section">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1851031451409162" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <div class="card">
+      <h2>🔧 Extra Tools</h2>
+      <button onclick="window.open('https://www.remove.bg/', '_blank')">Remove Background</button>
+      <button onclick="window.open('https://imgupscaler.com/', '_blank')">Make HD Photo</button>
+    </div>
+
+    <div class="card ad-section">
+      <ins class="adsbygoogle"
+        data-ad-client="ca-pub-1851031451409162"
+        data-ad-slot="1234567890"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
   </div>
 
   <script>
@@ -152,18 +166,27 @@
 
     function compressImage() {
       const file = imageInput.files[0];
-      const quality = parseInt(document.getElementById('quality').value) / 100;
-      const width = parseInt(document.getElementById('width').value);
-      const height = parseInt(document.getElementById('height').value);
-
       if (!file) return alert("Please upload an image first.");
+
+      let quality = parseInt(document.getElementById('quality').value) / 100;
+      let widthVal = document.getElementById('width').value;
+      let heightVal = document.getElementById('height').value;
+
+      function toPixels(val) {
+        if (val.toLowerCase().includes('mm')) {
+          return Math.round(parseFloat(val) * 3.78); // 1 mm = 3.78 px approx
+        }
+        return parseInt(val);
+      }
+
+      const width = toPixels(widthVal);
+      const height = toPixels(heightVal);
 
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = function (event) {
         const img = new Image();
         img.src = event.target.result;
-
         img.onload = function () {
           const canvas = document.createElement('canvas');
           canvas.width = width || img.width;
