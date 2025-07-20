@@ -2,74 +2,69 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Free Online Image Compressor, Resizer, Background Remover & HD Enhancer. Compress, resize, and optimize your photos easily.">
-  <title>Image Tool - Compress, Resize, Enhance</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1851031451409162" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Online Image Compressor, Resizer, Background Remover & HD Enhancer." />
+  <title>✨ Image Tool - Compress, Resize & Enhance Photos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1851031451409162"
+    crossorigin="anonymous"></script>
   <style>
     :root {
-      --primary: #0077cc;
-      --accent: #ff4081;
-      --bg: #f0f2f5;
-      --card: #ffffff;
-      --text: #333;
+      --primary: #4a90e2;
+      --accent: #ff6f61;
+      --text: #2d2d2d;
     }
 
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background-color: var(--bg);
-      padding: 1rem;
+      background-image: url('https://www.transparenttextures.com/patterns/white-diamond.png');
+      background-color: #fcfcfc;
+      background-repeat: repeat;
       color: var(--text);
+      padding: 1rem;
     }
 
     .container {
+      max-width: 850px;
+      margin: auto;
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 2rem;
-      max-width: 1000px;
-      margin: auto;
     }
 
     .card {
-      background: var(--card);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
       padding: 2rem;
-      width: 100%;
-      box-sizing: border-box;
+      backdrop-filter: blur(6px);
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 1.5rem;
-      color: var(--primary);
-    }
-
-    input[type="file"] {
-      margin: 0.8rem auto;
-    }
-
-    img.preview, img.result {
-      display: block;
-      max-width: 100%;
-      margin: 1rem auto;
-      border-radius: 12px;
-    }
-
-    label {
-      margin-top: 1rem;
-      display: block;
+      font-size: 2rem;
+      background: linear-gradient(to right, #ff6f61, #4a90e2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       font-weight: bold;
     }
 
-    input, button, a.download {
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+
+    input,
+    textarea,
+    button,
+    select,
+    a.download {
       width: 100%;
-      padding: 0.7rem;
-      margin-top: 0.3rem;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
       border-radius: 10px;
       border: 1px solid #ccc;
       box-sizing: border-box;
@@ -77,39 +72,34 @@
     }
 
     button {
-      background: var(--primary);
-      color: #fff;
+      background: linear-gradient(90deg, #8e44ad, #3498db);
+      color: white;
+      font-weight: bold;
       border: none;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: 0.3s ease;
     }
 
     button:hover {
-      background: #005fa3;
+      background: linear-gradient(90deg, #6c3483, #2e86c1);
     }
 
     a.download {
-      display: block;
+      background: linear-gradient(90deg, #f57c00, #ef5350);
+      color: white;
+      font-weight: bold;
       text-align: center;
-      background: var(--accent);
-      color: #fff;
       text-decoration: none;
       margin-top: 1rem;
+      display: block;
     }
 
-    .color-boxes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    .color-box {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      cursor: pointer;
-      border: 2px solid #ddd;
+    img.preview,
+    img.result {
+      display: block;
+      max-width: 100%;
+      margin-top: 1rem;
+      border-radius: 10px;
     }
 
     .ad-section {
@@ -117,15 +107,9 @@
       text-align: center;
     }
 
-    .ad-section ins {
-      display: block;
-      width: 100%;
-      min-height: 90px;
-    }
-
     @media (max-width: 600px) {
       .card {
-        padding: 1.2rem;
+        padding: 1rem;
       }
     }
   </style>
@@ -134,115 +118,75 @@
 <body>
   <div class="container">
     <div class="card">
-      <h2>📷 Image Compressor & Resizer</h2>
-      <input type="file" id="imageInput" accept="image/*">
-      <img id="preview" class="preview" alt="Preview Image" hidden>
-
-      <label for="quality">Compression Quality (1-100):</label>
-      <input type="number" id="quality" min="1" max="100" value="75">
-
-      <label for="width">Resize Width (px or mm):</label>
-      <input type="text" id="width" placeholder="e.g. 800 or 100mm">
-
-      <label for="height">Resize Height (px or mm):</label>
-      <input type="text" id="height" placeholder="e.g. 600 or 50mm">
-
-      <button onclick="compressImage()">Compress & Resize</button>
-
-      <img id="result" class="result" hidden>
-      <p id="info"></p>
-      <a id="downloadLink" class="download" hidden>📥 Download Image</a>
+      <h2>✨ Free Image Compressor & Resizer Tool</h2>
+      <input type="file" id="imageInput" accept="image/*" multiple />
+      <label>Resize Width (px):</label>
+      <input type="number" id="resizeWidth" placeholder="800" />
+      <label>Resize Height (px):</label>
+      <input type="number" id="resizeHeight" placeholder="600" />
+      <label>Compression Quality (1-100):</label>
+      <input type="number" id="quality" value="70" />
+      <button onclick="compressImages()">Compress and Resize</button>
+      <div id="output"></div>
     </div>
 
     <div class="card">
-      <h2>🎨 Background Color</h2>
-      <div class="color-boxes">
-        <div class="color-box" style="background: #ffffff" onclick="changeBg('#ffffff')"></div>
-        <div class="color-box" style="background: #f0f0f0" onclick="changeBg('#f0f0f0')"></div>
-        <div class="color-box" style="background: #000000" onclick="changeBg('#000000')"></div>
-        <div class="color-box" style="background: #e0f7fa" onclick="changeBg('#e0f7fa')"></div>
-        <div class="color-box" style="background: #fce4ec" onclick="changeBg('#fce4ec')"></div>
-      </div>
+      <h2>🛠️ More Image Tools</h2>
+      <button onclick="window.location.href='https://www.remove.bg/'">🧽 Remove Background</button>
+      <button onclick="window.location.href='https://hdphotomaker.com/'">📸 HD Photo Maker</button>
     </div>
 
     <div class="card">
-      <h2>🔧 Extra Tools</h2>
-      <button onclick="window.open('https://www.remove.bg/', '_blank')">Remove Background</button>
-      <button onclick="window.open('https://imgupscaler.com/', '_blank')">Make HD Photo</button>
+      <h2>💬 Leave a Comment</h2>
+      <textarea rows="4" placeholder="Your feedback..."></textarea>
+      <button>Submit</button>
     </div>
 
-    <div class="card ad-section">
+    <div class="ad-section">
       <ins class="adsbygoogle"
+        style="display:block"
         data-ad-client="ca-pub-1851031451409162"
         data-ad-slot="1234567890"
         data-ad-format="auto"
         data-full-width-responsive="true"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </div>
 
   <script>
-    const imageInput = document.getElementById('imageInput');
-    const preview = document.getElementById('preview');
-    const result = document.getElementById('result');
-    const info = document.getElementById('info');
-    const downloadLink = document.getElementById('downloadLink');
+    function compressImages() {
+      const files = document.getElementById('imageInput').files;
+      const resizeW = parseInt(document.getElementById('resizeWidth').value);
+      const resizeH = parseInt(document.getElementById('resizeHeight').value);
+      const quality = parseInt(document.getElementById('quality').value);
+      const output = document.getElementById('output');
+      output.innerHTML = '';
 
-    imageInput.addEventListener('change', () => {
-      const file = imageInput.files[0];
-      if (!file) return;
-      preview.src = URL.createObjectURL(file);
-      preview.hidden = false;
-    });
-
-    function compressImage() {
-      const file = imageInput.files[0];
-      if (!file) return alert("Please upload an image first.");
-
-      let quality = parseInt(document.getElementById('quality').value) / 100;
-      let widthVal = document.getElementById('width').value;
-      let heightVal = document.getElementById('height').value;
-
-      function toPixels(val) {
-        if (val.toLowerCase().includes('mm')) {
-          return Math.round(parseFloat(val) * 3.78);
-        }
-        return parseInt(val);
-      }
-
-      const width = toPixels(widthVal);
-      const height = toPixels(heightVal);
-
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = function (event) {
-        const img = new Image();
-        img.src = event.target.result;
-        img.onload = function () {
-          const canvas = document.createElement('canvas');
-          canvas.width = width || img.width;
-          canvas.height = height || img.height;
-
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-          canvas.toBlob(blob => {
-            const newSize = (blob.size / 1024).toFixed(2);
-            result.src = URL.createObjectURL(blob);
-            result.hidden = false;
-            downloadLink.href = result.src;
-            downloadLink.download = 'compressed.jpg';
-            downloadLink.hidden = false;
-            info.innerText = `📉 Compressed Size: ${newSize} KB | 📐 ${canvas.width} x ${canvas.height}`;
-          }, 'image/jpeg', quality);
-        }
-      }
-    }
-
-    function changeBg(color) {
-      document.body.style.backgroundColor = color;
+      [...files].forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = resizeW || img.width;
+            canvas.height = resizeH || img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            canvas.toBlob(blob => {
+              const url = URL.createObjectURL(blob);
+              const sizeKB = (blob.size / 1024).toFixed(2);
+              const compression = 100 - ((blob.size / file.size) * 100).toFixed(0);
+              output.innerHTML += `
+                <p><strong>Compressed:</strong> ${compression}% | <strong>Size:</strong> ${sizeKB} KB</p>
+                <img src="${url}" class="result" />
+                <a class="download" href="${url}" download="compressed-${file.name}">⬇️ Download</a>
+              `;
+            }, 'image/jpeg', quality / 100);
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
     }
   </script>
 </body>
